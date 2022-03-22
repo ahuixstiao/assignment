@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页</title>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div style="padding-left: 40%; padding-top: 10%">
+        <p>学生信息注册</p>
+        <form action="http://localhost:8080/ShoppingPlatform/helloServlet" method="get">
+            姓名: <input name="name">
+            <br/><br/>
+            性别: 男<input name="sex" type="radio" value="1">  女<input name="sex" type="radio" value="0">
+            <br/><br/>
+            出生日期: <input name="date" type="date">
+            <br/><br/>
+            上传照片: <input name="file" type="file">
+            <br/><br/>
+            <input id="button" type="submit">
+        </form>
+    </div>
+</body>
+</html>

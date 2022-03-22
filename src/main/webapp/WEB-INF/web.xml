@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+>
+  <!--
+    可配置 servlet程序、Fileter过滤器、Listenner监听器、Session超时等
+   -->
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!-- 配置servlet程序 -->
+  <servlet>
+    <!-- servlet-name标签 servlet程序的别名（一般使用类名） -->
+    <servlet-name>HelloServlet</servlet-name>
+    <!-- servlet程序的全类名 -->
+    <servlet-class>com.ahuixst.servlet.HelloServlet</servlet-class>
+    <!-- Servlet程序 init初始化时加载的参数 -->
+    <init-param>
+      <param-name>username</param-name>
+      <param-value>root</param-value>
+    </init-param>
+  </servlet>
+  <!-- servlet-mapping标签 给servlet程序配置访问地址 -->
+  <servlet-mapping>
+    <!-- 与想要让请求访问到的servlet程序的别名保持一致 否则servlet不知道要访问哪个资源类 -->
+    <servlet-name>HelloServlet</servlet-name>
+    <!--
+      表示该映射所要拦截的请求
+      如果设为/则表示拦截工程路径上的所有请求
+      如果设为/helloServlet则表示拦截工程上名为helloServlet的请求
+      -->
+    <url-pattern>/helloServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>HeeloServlet2</servlet-name>
+    <servlet-class>com.ahuixst.servlet.HelloServlet2</servlet-class>
+    <init-param>
+      <param-name>jdbc</param-name>
+      <param-value>mysql://localhost:3306/test</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HeeloServlet2</servlet-name>
+    <url-pattern>/helloServlet2</url-pattern>
+  </servlet-mapping>
+
+</web-app>

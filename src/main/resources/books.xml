@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+    <book sn="SN12341232">
+        <name>设计模式</name>
+        <price>9.9</price>
+        <author>阿辉</author>
+    </book>
+    <book sn="SN12341231">
+        <name>数据结构</name>
+        <price>99.9</price>
+        <author>阿辉</author>
+    </book>
+</books>
