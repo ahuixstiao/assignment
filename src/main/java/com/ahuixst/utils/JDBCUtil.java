@@ -1,5 +1,9 @@
 package com.ahuixst.utils;
 
+import com.mysql.cj.protocol.Resultset;
+import lombok.SneakyThrows;
+
+import java.math.BigDecimal;
 import java.sql.*;
 
 /**
@@ -9,29 +13,37 @@ import java.sql.*;
  **/
 public class JDBCUtil {
     //数据库驱动
-    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String JDBC_DRIVER = ResourceUtil.getConfigByName("jdbc.driver");
     //数据库连接地址以及数据库名称
-    private static final String URL = "jdbc:mysql://localhost:3306/demo";
+    private static final String URL = ResourceUtil.getConfigByName("jdbc.url");
     //数据库账号
-    private static final String USER = "root";
+    private static final String USER = ResourceUtil.getConfigByName("jdbc.username");
     //数据库密码
-    private static final String PASSWORD = "ahui0503";
+    private static final String PASSWORD = ResourceUtil.getConfigByName("jdbc.password");
+
     //类实例化时获取Statement
-    private Statement statement = getConnection();
+    private Statement statement;
 
-    public JDBCUtil () throws SQLException {
-
+    @SneakyThrows
+    public JDBCUtil () {
+        statement = getConnection();
     }
 
     //test
-    public static void main(String[] args) throws Exception {
-        JDBCUtil jdbc = new JDBCUtil();
-        ResultSet resultSet = jdbc.selectMyData("select * from myarea");
+    @SneakyThrows
+    public static void main(String[] args) {
+        /*JDBCUtil jdbc = new JDBCUtil();
+        jdbc.operatingMyDataBase("insert into book(book_name,author,price,remarks) values('三只小猪', '安徒生', 10.00, '童话书')");
+        ResultSet resultSet = jdbc.selectMyData("select * from book");
         while (resultSet.next()){
-            int aid = resultSet.getInt("aid");
-            String aname = resultSet.getString("aname");
-            System.out.println(aid+"   "+aname);
+            int bookId = resultSet.getInt("book_id");
+            String bookName = resultSet.getString("book_name");
+            String author = resultSet.getString("author");
+            BigDecimal price = resultSet.getBigDecimal("price");
+            String remarks = resultSet.getString("remarks");
+            System.out.println(bookId+"     "+bookName+"      "+author+"    "+price+"   "+remarks);
         }
+        resultSet.close();*/
     }
 
     /**
@@ -39,17 +51,20 @@ public class JDBCUtil {
      * @return Statement
      * @throws Exception
      */
-    public Statement getConnection() throws SQLException {
+    @SneakyThrows
+    public Statement getConnection() {
         Connection connection = null;
         try {
             Class.forName(JDBC_DRIVER);
             System.out.println("连接数据库...");
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);  //构建连接
             System.out.println("实例statement对象...");
+            // 如果要发送不带参数的SQL则使用createStatement
+            // 若是语句不变参数不同的话则换成preparedStatement进行动态编译性能会更优
             statement = connection.createStatement();
-        }catch (ClassNotFoundException | SQLException exception){
+        }catch (SQLException | ClassNotFoundException sqlException){
             //打印堆栈异常
-            exception.printStackTrace();
+            sqlException.printStackTrace();
             // 关闭资源
             connection.close();
             statement.close();
@@ -61,9 +76,9 @@ public class JDBCUtil {
      * 查询
      * @param sql 要执行的SQL语句
      * @return ResultSet对象 返回结果集
-     * @throws Exception
      */
-    public ResultSet selectMyData(String sql) throws Exception{
+    @SneakyThrows
+    public ResultSet selectMyData(String sql) {
         //向数据库发送SQL
         return statement.executeQuery(sql);
     }
@@ -72,31 +87,21 @@ public class JDBCUtil {
      * 修改
      * @param sql 要执行的SQL语句
      * @return int 受影响条数
-     * @throws SQLException
      */
-    public int updateMyData(String sql) throws SQLException{
+    @SneakyThrows
+    public int updateMyData(String sql) {
         //更新 返回受影响行数
         return statement.executeUpdate(sql);
     }
 
     /**
-     * 执行创建或删除
+     * 执行插入或删除
      * @param sql 要执行的SQL语句
-     * @param sqlType 类型
-     * @return boolean类型 是否成功
      * @throws SQLException
      */
-    public boolean operatingMyDataBase(String sql, String sqlType) throws SQLException {
-        boolean executeResult = false;
-        switch (sqlType){
-            case "create" :
-                executeResult = statement.execute(sql);
-                break;
-            case "delete" :
-                executeResult = statement.execute(sql);
-                break;
-        }
-        return executeResult;
+    @SneakyThrows
+    public void operatingMyDataBase(String sql) {
+         statement.execute(sql);
     }
 
 }
