@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.ahuixst</groupId>
-  <artifactId>shopping</artifactId>
+  <artifactId>assignments</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>shopping</name>
+  <name>assignments</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -65,11 +65,18 @@
       <version>8.0.27</version>
     </dependency>
 
-    <!--lombok-->
+    <!--lombok bean模版插件-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.20</version>
+    </dependency>
+
+    <!-- logback 日志框架 -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.2.11</version>
     </dependency>
 
     <dependency>

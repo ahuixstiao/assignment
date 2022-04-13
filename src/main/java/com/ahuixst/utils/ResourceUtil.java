@@ -1,5 +1,7 @@
 package com.ahuixst.utils;
 
+import lombok.Data;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;

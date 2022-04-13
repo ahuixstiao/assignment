@@ -56,9 +56,7 @@ public class JDBCUtil {
         Connection connection = null;
         try {
             Class.forName(JDBC_DRIVER);
-            System.out.println("连接数据库...");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);  //构建连接
-            System.out.println("实例statement对象...");
             // 如果要发送不带参数的SQL则使用createStatement
             // 若是语句不变参数不同的话则换成preparedStatement进行动态编译性能会更优
             statement = connection.createStatement();
