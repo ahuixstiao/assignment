@@ -33,8 +33,12 @@ public class Dom4jTest {
             String name = books.element("name").getText();
             BigDecimal price = BigDecimal.valueOf(Double.parseDouble(books.element("price").getText()));
             String author = books.element("author").getText();
-            Books book = new Books(sn,name,price,author);
-            System.out.println(book);
         }
+    }
+
+    @Test
+    public void loadAppilicationConText(){
+        String str = "Hello, World!";
+        System.out.println(String.format("%s", str));
     }
 }

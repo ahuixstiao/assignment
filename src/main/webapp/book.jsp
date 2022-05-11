@@ -14,6 +14,9 @@
 </head>
 <body>
     <%
+        if(request.getAttribute("bookList") == null){
+            return;
+        }
         List<Book> bookList = (List<Book>) request.getAttribute("bookList");
     %>
     <h1 style="padding-left: 45%">图书列表</h1>
@@ -31,7 +34,8 @@
         </tr>
         <%
             if(bookList != null && bookList.size() >0){
-                for (Book book : bookList) { %>
+                for (Book book : bookList) {
+        %>
         <tr>
             <td><%= book.getBookId() %></td>
             <td><%= book.getBookName() %></td>

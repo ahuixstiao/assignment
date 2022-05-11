@@ -6,27 +6,27 @@
 >
   <!--
     web.xml可配置 servlet程序、Fileter过滤器、Listenner监听器、Session超时等
+    servlet3.0后可使用@WebServlet来配置servlet程序
    -->
   <display-name>Archetype Created Web Application</display-name>
 
-
   <!-- 配置servlet程序 -->
-  <servlet>
+  <!--<servlet>-->
     <!-- servlet-name标签 servlet程序的别名（一般使用类名） -->
-    <servlet-name>BookController</servlet-name>
+    <!--<servlet-name>BookController</servlet-name>-->
     <!-- servlet程序要访问的全类名 -->
-    <servlet-class>com.ahuixst.controller.BookController</servlet-class>
-  </servlet>
+    <!--<servlet-class>com.ahuixst.controller.BookController</servlet-class>
+  </servlet>-->
   <!-- servlet-mapping标签 给servlet程序配置访问地址 -->
-  <servlet-mapping>
+  <!--<servlet-mapping>-->
     <!-- 与想要让请求访问到的servlet程序的别名保持一致 否则servlet不知道要访问哪个资源类 -->
-    <servlet-name>BookController</servlet-name>
+    <!--<servlet-name>BookController</servlet-name>-->
     <!--
       表示该映射所要拦截的请求
       如果设为/则表示拦截工程路径上的所有请求
       如果设为/helloServlet则表示拦截工程上名为helloServlet的请求
-      -->
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
+     -->
+ <!--   <url-pattern>*.do</url-pattern>
+  </servlet-mapping>-->
 
 </web-app>

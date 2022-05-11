@@ -1,24 +1,24 @@
 package com.ahuixst.controller;
 
-import cn.hutool.json.JSONObject;
-import com.ahuixst.dao.BookDao;
+import com.ahuixst.service.BookService;
 import com.ahuixst.entity.Book;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * @Author: ahui
- * @Description: TODO
+ * @Description: Book控制类
  * @DateTime: 2022/4/6 - 18:10
  **/
+@WebServlet(name = "BookController", urlPatterns = "*.do") //Servlet3.0后支持注解配置Servlet程序
 public class BookController extends HttpServlet {
 
-    private BookDao bookDao = new BookDao();
+    private BookService bookService = new BookService();
 
     //重写doGet方法
     @Override
@@ -56,9 +56,18 @@ public class BookController extends HttpServlet {
     public void getBookList(HttpServletRequest req, HttpServletResponse resp) {
         try {
             req.setCharacterEncoding("UTF-8");
-            //调用dao层的方法
-            //将结果设置到request域中
-            req.setAttribute("bookList", bookDao.selectBookList());
+            //获取总条数
+            int i = bookService.queryCount();
+            //当前页
+            req.getParameter("currentPage");
+            //显示条数
+            req.getParameter("pageSize");
+            if(i < 0){
+                throw new RuntimeException("暂无数据!");
+            }else {
+                //将结果设置到request域中
+                req.setAttribute("bookList", bookService.selectBookList());
+            }
             //转发到book.jsp
             req.getRequestDispatcher("/book.jsp").forward(req, resp);
         }catch (Exception e){
@@ -70,9 +79,9 @@ public class BookController extends HttpServlet {
         try {
             //调用dao层的方法
             //将结果设置到request域中
-            req.setAttribute("bookInfo", bookDao.selectBookInfo(Integer.valueOf(req.getParameter("bookId"))));
+            req.setAttribute("bookInfo", bookService.selectBookInfo(Integer.valueOf(req.getParameter("bookId"))));
             //转发到bookInfo.jsp
-            getBookList(req,resp);
+            req.getRequestDispatcher("/WEB-INF/book/bookInfo.jsp").forward(req, resp);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -87,7 +96,7 @@ public class BookController extends HttpServlet {
             book.setPrice(new BigDecimal(req.getParameter("price")));
             book.setRemarks(req.getParameter("remarks"));
             //调用dao层的方法
-            bookDao.insertBookInfo(book);
+            bookService.insertBookInfo(book);
             //转发到bookInfo.jsp
             getBookList(req,resp);
         }catch (Exception e){
@@ -99,7 +108,7 @@ public class BookController extends HttpServlet {
     public void deleteBook(HttpServletRequest req, HttpServletResponse resp) {
         try {
             //调用dao层的方法
-            bookDao.deleteBookInfo(Integer.valueOf(req.getParameter("bookId")));
+            bookService.deleteBookInfo(Integer.valueOf(req.getParameter("bookId")));
             //转发到book.jsp
             getBookList(req,resp);
         }catch (Exception e){
@@ -118,7 +127,7 @@ public class BookController extends HttpServlet {
             book.setPrice(new BigDecimal(req.getParameter("price")));
             book.setRemarks(req.getParameter("remarks"));
             //调用dao层的方法
-            bookDao.updateBookInfo(book);
+            bookService.updateBookInfo(book);
             //转发到book.jsp
             getBookList(req,resp);
         }catch (Exception e){
@@ -135,7 +144,7 @@ public class BookController extends HttpServlet {
                 req.setAttribute("requestMethod", "addBook");
                 req.getRequestDispatcher("/WEB-INF/book/fillInPage.jsp").forward(req, resp);
             }else if(url.equals("update")){
-                Book book = bookDao.selectBookInfo(Integer.valueOf(req.getParameter("bookId")));
+                Book book = bookService.selectBookInfo(Integer.valueOf(req.getParameter("bookId")));
                 req.setAttribute("requestMethod", "updateBook");
                 req.setAttribute("bookInfo", book);
                 req.getRequestDispatcher("/WEB-INF/book/fillInPage.jsp").forward(req, resp);
