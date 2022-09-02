@@ -1,9 +1,7 @@
 package com.ahuixst.entity;
 
-import lombok.AllArgsConstructor;
+import io.mybatis.provider.Entity;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,17 +12,19 @@ import java.math.BigDecimal;
  * @DateTime: 2022/3/28 - 12:55
  **/
 @Data
-@NoArgsConstructor
+@Entity.Table(value = "book", remark = "书籍")
 public class Book implements Serializable {
+
+    @Entity.Column(id = true)
     private Integer bookId;
+    @Entity.Column
     private String bookName;
+    @Entity.Column
+    private String image;
+    @Entity.Column
     private String author;
+    @Entity.Column
     private BigDecimal price;
+    @Entity.Column
     private String remarks;
-    public Book(String bookName, String author, BigDecimal price, String remarks) {
-        this.bookName = bookName;
-        this.author = author;
-        this.price = price;
-        this.remarks = remarks;
-    }
 }

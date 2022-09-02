@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+body {
+    background-color: #f6f6f6;
+}
+a {
+    text-decoration: none;
+}
+
+nav {
+    height: 50px;
+    padding: 0 30px;
+}
+
+.nav-left {
+    float: left;
+}
+.nav-right {
+    float: right;
+}
+.nav-left li {
+    float: left;
+    padding: 3px 5px;
+    margin-right: 10px;
+}
+.nav-left li a {
+    color: white;
+    text-decoration: none;
+}
+.shu {
+    background-color: #49afd0;
+}
+.wz {
+    background-color: #8ecd51;
+}
+.home {
+    background-color: #90a5a8;
+}
+
+.nav-right a {
+    color: #777;
+}
+.nav-right ul li {
+    line-height: 50px;
+    float: left;
+    margin-left: 15px;
+}
+.nav-right ul li:hover a {
+    color: black;
+}
+
+.nav-seach {
+    margin-top: 17px;
+}
+.menu {
+    margin-top: 17px;
+}
+.seach {
+    width: 970px;
+    position: relative;
+    margin: 0 auto;
+}
+.seach input {
+    float: left;
+    height: 34px;
+    width: 822px;
+    font-size: 20px;
+}
+.seach button {
+    float: right;
+    height: 38px;
+    width: 144px;
+}
+
+.container {
+    width: 970px;
+    margin: 0 auto;
+    margin-top: 120px;
+}
+
+.container h2 {
+    color: #49afd0;
+}
+.container hr {
+    border-top: 3px solid #49afd0;
+}
+.box {
+    width: 100%;
+    column-gap: 5px;
+    column-count: 4;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.box div {
+    width: 100%;
+}
+.box img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+    .box {
+        column-count: 3;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .box {
+        column-count: 2;
+    }
+    .container {
+        width: 100%;
+    }
+}
+@media (max-width: 767px) {
+    .box {
+        column-count: 1;
+    }
+    .container {
+        width: 100%;
+    }
+}

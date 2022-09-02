@@ -15,25 +15,26 @@
     Book bookInfo = (Book) request.getAttribute("bookInfo");
 %>
 <body>
-    <div style="margin: 10% 42%">
-        <form action="${pageContext.request.contextPath}/<%=requestUrl%>.do" method="post">
+    <div style="padding-top: 130px; padding-left: 40%">
+        <form action="${pageContext.request.contextPath}/<%=requestUrl%>.do" method="post" enctype="multipart/form-data">
             <table>
                 <%
                     if(requestUrl.equals("addBook")) {
                         bookInfo = new Book();
                         bookInfo.setBookName("");
+                        bookInfo.setImage("");
                         bookInfo.setAuthor("");
                         bookInfo.setPrice(new BigDecimal(0));
                         bookInfo.setRemarks("");
-                    }else if(requestUrl.equals("updateBook")) {%>
-                <tr>
-                    <td>图书编号</td>
-                    <td><input type="text" name="bookId" value="<%=bookInfo.getBookId()%>"/></td>
-                </tr>
-                <%}%>
+                    }
+                %>
                 <tr>
                     <td>图书名称</td>
                     <td><input type="text" name="bookName" value="<%=bookInfo.getBookName()%>"/></td>
+                </tr>
+                <tr>
+                    <td>图书图片</td>
+                    <td><input type="file" name="image" value="<%=bookInfo.getImage()%>"/></td>
                 </tr>
                 <tr>
                     <td>图书作者</td>
@@ -46,11 +47,13 @@
                 <tr>
                     <td>图书描述</td>
                     <td>
-                        <textarea name="remarks" rows="5" cols="20" placeholder="请输入图书描述"><%=bookInfo.getRemarks()%></textarea>
+                        <label>
+                            <textarea name="remarks" rows="5" cols="20" placeholder="请输入图书描述"><%=bookInfo.getRemarks()%></textarea>
+                        </label>
                     </td>
                 </tr>
             </table>
-            <input style="margin:3% 10%" type="submit" value="提交">
+            <input style="padding: 8px 16px; margin: 15px 75px; color: #fff; background-color: #ec7259; border-color: #ec7259" type="submit" value="提交">
         </form>
     </div>
 </body>

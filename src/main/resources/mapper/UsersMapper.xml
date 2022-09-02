@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间是为了绑定需要映射的接口，SQL语句传统是写在该文件中，也可以用注解的方式写在接口的方法上。 -->
+<!-- 这个文件是对Mapper接口的一种映射为了让SQL在代码中脱离出来 -->
+<mapper namespace="com.ahuixst.dao.UsersMapper">
+
+</mapper>

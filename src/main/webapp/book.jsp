@@ -14,9 +14,6 @@
 </head>
 <body>
     <%
-        if(request.getAttribute("bookList") == null){
-            return;
-        }
         List<Book> bookList = (List<Book>) request.getAttribute("bookList");
     %>
     <h1 style="padding-left: 45%">图书列表</h1>

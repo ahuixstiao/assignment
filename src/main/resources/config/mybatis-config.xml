@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--configuration标签有顺序。p s tA tH o p e d m-->
+
+    <settings>
+        <!-- 开启日志 -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!-- 开启二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 将经典的SQL字段映射为Java驼峰命名变量-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 别名 用于将实体类的字段映射到数据库表 -->
+    <typeAliases>
+        <typeAlias type="com.ahuixst.entity.Book" alias="book"/>
+        <typeAlias type="com.ahuixst.entity.Users" alias="users"/>
+    </typeAliases>
+
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
+    <!-- 映射注册 -->
+    <!-- @Mapper注解与该配置作用相同，都是将接口交由Mybatis为其生成代理实现类 这也是为什么明明没有去实现Mapper接口也能直接调用方法执行 -->
+    <mappers>
+        <!--<mapper class="com.ahuixst.dao.BookMapper"/>-->
+    </mappers>
+
+</configuration>

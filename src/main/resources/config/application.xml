@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--引入db.properties-->
+    <context:property-placeholder location="db.properties"/>
+
+    <!--扫描注解-->
+    <context:component-scan base-package="com.ahuixst"/>
+
+    <!-- 采用数据连接池来配置数据源 -->
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        &lt;!&ndash;驱动&ndash;&gt;
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        &lt;!&ndash;数据库url&ndash;&gt;
+        <property name="url" value="${jdbc.url}"/>
+        &lt;!&ndash;用户名&ndash;&gt;
+        <property name="username" value="${jdbc.username}"/>
+        &lt;!&ndash;密码&ndash;&gt;
+        <property name="password" value="${jdbc.password}"/>
+    </bean>-->
+
+    <!-- 通过往SqlSessionFactoryBean设置参数 来生成SqlsessionFactory 并交给Spring管理 -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        &lt;!&ndash; 注入链接数据 &ndash;&gt;
+        <property name="dataSource" ref="dataSource"/>
+        &lt;!&ndash; 绑定mybatis配置文件 &ndash;&gt;
+        <property name="configLocation" value="mybatis-config.xml"/>
+    </bean>-->
+
+    <!-- 将SqlSession的加载权限 交给Spring管理 -->
+    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        &lt;!&ndash; 初始化时的构造参数 为sqlSessionFactoryBean对象 因为sqlsession只能通过工厂创建 &ndash;&gt;
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>-->
+
+</beans>
